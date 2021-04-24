@@ -5,14 +5,14 @@
 
 export interface paths {
   "/api/something/{id}": {
-    put: operations["/api/something/{id}/put"];
+    put: operations["updateSomething"];
   };
 }
 
 export interface definitions {}
 
 export interface operations {
-  "/api/something/{id}/put": {
+  updateSomething: {
     parameters: {
       path: {
         id: number;

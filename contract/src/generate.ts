@@ -4,8 +4,12 @@ import { schema } from "./schema";
 import { router } from "./router";
 
 schema.forEach((s) => {
-  console.log({ s });
-  router[s.method]({ url: s.url, handlers: [], schema: s.schema });
+  router[s.method]({
+    url: s.url,
+    handlers: [],
+    schema: s.schema,
+    operationId: s.operationId,
+  });
 });
 
 // @ts-expect-error

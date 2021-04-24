@@ -5,6 +5,7 @@ export const schema = [
   {
     url: "/api/something/:id",
     method: "put" as const,
+    operationId: "updateSomething",
     schema: {
       request: {
         query: s.objectWithOnly({
