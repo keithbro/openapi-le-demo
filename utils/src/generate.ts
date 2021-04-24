@@ -1,4 +1,5 @@
-import swaggerToTS from "openapi-typescript";
+import generateServerTypes from "openapi-typescript";
+import { generate as generateClient } from "openapi-typescript-codegen";
 import { writeFileSync } from "fs";
 import { initialize } from "./router";
 import { ApiSchema } from "./types";
@@ -16,11 +17,13 @@ export const generate = (apiSchema: ApiSchema) => {
   });
 
   // @ts-expect-error
-  const input = router.toSwagger();
+  const openApiSpec = router.toSwagger();
 
-  console.log(JSON.stringify(input, null, 2));
+  console.log(JSON.stringify(openApiSpec, null, 2));
 
-  const output = swaggerToTS(input);
+  const output = generateServerTypes(openApiSpec);
   // console.log(output);
   writeFileSync("./src/server.ts", output);
+
+  generateClient({ input: openApiSpec, output: "./src/client" });
 };

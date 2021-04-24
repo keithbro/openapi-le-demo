@@ -10,6 +10,7 @@
   "dependencies": {
     "@luxuryescapes/router": "../../../router",
     "express": "^4.17.1",
-    "openapi-typescript": "../../../openapi-typescript"
+    "openapi-typescript": "../../../openapi-typescript",
+    "openapi-typescript-codegen": "^0.9.3"
   }
 }
