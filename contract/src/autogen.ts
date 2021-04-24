@@ -1,8 +1,7 @@
-import { operations } from "./server";
-import { Request } from "express";
-import { RouterAbstraction } from "@luxuryescapes/router";
-import { apiSchema } from "./schema";
 import * as utils from "../../utils/src/router";
+import { ExpressRequest, LeRouter } from "../../utils/src/types";
+import { operations } from "./server";
+import { apiSchema } from "./schema";
 
 interface CustomResponse<O extends keyof operations> {
   send: (response: operations[O]["responses"]) => void;
@@ -10,7 +9,7 @@ interface CustomResponse<O extends keyof operations> {
 
 export interface CustomHandler<O extends keyof operations> {
   (
-    req: Request<
+    req: ExpressRequest<
       operations[O]["parameters"]["path"],
       operations[O]["responses"]["schema"],
       operations[O]["parameters"]["body"]["payload"],
@@ -21,7 +20,7 @@ export interface CustomHandler<O extends keyof operations> {
 }
 
 export const register = <O extends keyof operations>(
-  router: RouterAbstraction,
+  router: LeRouter,
   operationId: O,
   handler: CustomHandler<O>
 ) => utils.register(router, apiSchema, operationId, handler);
