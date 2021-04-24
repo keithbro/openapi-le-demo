@@ -52,10 +52,7 @@ export const registerEndpoint = <S extends ApiSchema>(
   const operationSchema = apiSchema[operationId];
 
   const expressHandler: RequestHandler = (expressReq, expressRes) => {
-    console.log("converting res");
     const res = convertResponse(expressRes);
-
-    console.log(expressReq.query);
 
     handler(expressReq, res);
   };
