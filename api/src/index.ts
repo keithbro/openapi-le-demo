@@ -1,7 +1,6 @@
-import { buildRouter, errorHandler } from "../../utils/src/router";
-import { CustomHandler, register } from "../../contract/src/autogen";
+import { CustomHandler, initialize } from "../../contract/src/autogen";
 
-const { router, server } = buildRouter();
+const { register, server } = initialize();
 
 const handler: CustomHandler<"updateSomething"> = (req, res) => {
   const { id } = req.params; // not actually a number
@@ -13,8 +12,6 @@ const handler: CustomHandler<"updateSomething"> = (req, res) => {
   res.send({ status: 201, schema: { id: 2 } });
 };
 
-register(router, "updateSomething", handler);
-
-server.use(errorHandler);
+register("updateSomething", handler);
 
 server.listen(3000, () => console.log("Listening..."));

@@ -1,10 +1,10 @@
 import swaggerToTS from "openapi-typescript";
 import { writeFileSync } from "fs";
-import { buildRouter } from "./router";
+import { initialize } from "./router";
 import { ApiSchema } from "./types";
 
 export const generate = (apiSchema: ApiSchema) => {
-  const { router } = buildRouter();
+  const { router } = initialize();
 
   Object.entries(apiSchema).forEach(([operationId, schema]) => {
     router[schema.method]({

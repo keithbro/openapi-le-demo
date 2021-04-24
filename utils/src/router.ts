@@ -5,7 +5,7 @@ import {
 } from "@luxuryescapes/router";
 import { ApiSchema, CustomHandler, RawResponse } from "./types";
 
-export const buildRouter = (server = express()) => {
+export const initialize = (server = express()) => {
   server.use(express.json());
 
   const router = buildLeRouter(server, {

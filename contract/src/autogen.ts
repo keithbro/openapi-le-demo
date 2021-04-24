@@ -19,8 +19,13 @@ export interface CustomHandler<O extends keyof operations> {
   ): void;
 }
 
-export const register = <O extends keyof operations>(
-  router: LeRouter,
-  operationId: O,
-  handler: CustomHandler<O>
-) => utils.register(router, apiSchema, operationId, handler);
+export const initialize = () => {
+  const { router, server } = utils.initialize();
+
+  const register = <O extends keyof operations>(
+    operationId: O,
+    handler: CustomHandler<O>
+  ) => utils.register(router, apiSchema, operationId, handler);
+
+  return { register, router, server };
+};
