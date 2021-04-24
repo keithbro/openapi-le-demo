@@ -1,12 +1,11 @@
 // @ts-expect-error
 import * as s from "strummer";
 
-export const schema = [
-  {
+export const apiSchema = {
+  updateSomething: {
     url: "/api/something/:id",
     method: "put" as const,
-    operationId: "updateSomething",
-    schema: {
+    validationSchema: {
       request: {
         query: s.objectWithOnly({
           hello: s.string(),
@@ -23,4 +22,4 @@ export const schema = [
       },
     },
   },
-];
+};

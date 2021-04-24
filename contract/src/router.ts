@@ -4,7 +4,7 @@ import {
   RouterAbstraction,
 } from "@luxuryescapes/router";
 import express from "express";
-import { schema } from "./schema";
+import { apiSchema } from "./schema";
 import { operations } from "./server";
 import { Handler } from "./types";
 
@@ -39,13 +39,11 @@ const register = <O extends keyof operations>(
   operationId: O,
   handler: Handler<O>
 ) => {
-  console.log(schema);
-  const theSchema = schema.find((s) => s.operationId === operationId);
-  if (!theSchema) throw new Error(`No schema found for ${operationId}`);
+  const operationSchema = apiSchema[operationId];
 
-  router[theSchema.method]({
-    url: theSchema.url,
-    schema: theSchema.schema,
+  router[operationSchema.method]({
+    url: operationSchema.url,
+    schema: operationSchema.validationSchema,
     handlers: [handler],
   });
 };

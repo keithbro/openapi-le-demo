@@ -1,14 +1,14 @@
 import swaggerToTS from "openapi-typescript";
 import { writeFileSync } from "fs";
-import { schema } from "./schema";
+import { apiSchema } from "./schema";
 import { router } from "./router";
 
-schema.forEach((s) => {
-  router[s.method]({
-    url: s.url,
+Object.entries(apiSchema).forEach(([operationId, schema]) => {
+  router[schema.method]({
+    url: schema.url,
     handlers: [],
-    schema: s.schema,
-    operationId: s.operationId,
+    schema: schema.validationSchema,
+    operationId: operationId,
   });
 });
 
