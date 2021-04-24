@@ -43,7 +43,7 @@ export const convertResponse = (expressRes: Response) => {
   };
 };
 
-export const register = <S extends ApiSchema>(
+export const registerEndpoint = <S extends ApiSchema>(
   router: RouterAbstraction,
   apiSchema: S,
   operationId: keyof S,
@@ -52,7 +52,10 @@ export const register = <S extends ApiSchema>(
   const operationSchema = apiSchema[operationId];
 
   const expressHandler: RequestHandler = (expressReq, expressRes) => {
+    console.log("converting res");
     const res = convertResponse(expressRes);
+
+    console.log(expressReq.query);
 
     handler(expressReq, res);
   };

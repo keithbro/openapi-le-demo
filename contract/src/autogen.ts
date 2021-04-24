@@ -1,5 +1,5 @@
 import * as utils from "../../utils/src/router";
-import { ExpressRequest, LeRouter } from "../../utils/src/types";
+import { ExpressRequest } from "../../utils/src/types";
 import { operations } from "./server";
 import { apiSchema } from "./schema";
 
@@ -22,10 +22,12 @@ export interface CustomHandler<O extends keyof operations> {
 export const initialize = () => {
   const { router, server } = utils.initialize();
 
-  const register = <O extends keyof operations>(
+  const registerEndpoint = <O extends keyof operations>(
     operationId: O,
     handler: CustomHandler<O>
-  ) => utils.register(router, apiSchema, operationId, handler);
+  ) => utils.registerEndpoint(router, apiSchema, operationId, handler);
 
-  return { register, router, server };
+  return { registerEndpoint, router, server };
 };
+
+export { errorHandler } from "../../utils/src/router";

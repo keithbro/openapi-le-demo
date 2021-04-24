@@ -7,8 +7,5 @@
     "strummer": "^2.10.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
-  },
-  "dependencies": {
-    "@luxuryescapes/router": "../../../router"
   }
 }
