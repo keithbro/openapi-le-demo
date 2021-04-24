@@ -1,19 +1,16 @@
-import {
-  server,
-  router,
-  errorHandler,
-  register,
-} from "../../contract/src/router";
-import { Handler } from "../../contract/src/types";
+import { buildRouter, errorHandler } from "../../utils/src/router";
+import { CustomHandler, register } from "../../contract/src/autogen";
 
-const handler: Handler<"updateSomething"> = (req, res) => {
+const { router, server } = buildRouter();
+
+const handler: CustomHandler<"updateSomething"> = (req, res) => {
   const { id } = req.params; // not actually a number
   const { hello, world } = req.query;
   const { action } = req.body;
 
   console.log({ id, hello, world, action });
 
-  res.json({ id: 2, error: "hello" });
+  res.send({ status: 201, schema: { id: 2 } });
 };
 
 register(router, "updateSomething", handler);
