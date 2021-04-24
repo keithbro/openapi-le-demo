@@ -3,11 +3,11 @@ import { ExpressRequest } from "../../utils/src/types";
 import { operations } from "./server";
 import { apiSchema } from "./schema";
 
-interface CustomResponse<O extends keyof operations> {
+interface Response<O extends keyof operations> {
   send: (response: operations[O]["responses"]) => void;
 }
 
-export interface CustomHandler<O extends keyof operations> {
+export interface Handler<O extends keyof operations> {
   (
     req: ExpressRequest<
       operations[O]["parameters"]["path"],
@@ -15,7 +15,7 @@ export interface CustomHandler<O extends keyof operations> {
       operations[O]["parameters"]["body"]["payload"],
       operations[O]["parameters"]["query"]
     >,
-    res: CustomResponse<O>
+    res: Response<O>
   ): void;
 }
 
@@ -24,7 +24,7 @@ export const initialize = () => {
 
   const registerEndpoint = <O extends keyof operations>(
     operationId: O,
-    handler: CustomHandler<O>
+    handler: Handler<O>
   ) => utils.registerEndpoint(router, apiSchema, operationId, handler);
 
   return { registerEndpoint, router, server };

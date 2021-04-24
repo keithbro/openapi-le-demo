@@ -1,12 +1,8 @@
-import {
-  CustomHandler,
-  initialize,
-  errorHandler,
-} from "../../contract/src/autogen";
+import { Handler, initialize, errorHandler } from "../../contract/src/autogen";
 
 const { registerEndpoint, server } = initialize();
 
-const handler: CustomHandler<"updateSomething"> = (req, res) => {
+const handler: Handler<"updateSomething"> = (req, res) => {
   const { id } = req.params; // not actually a number
   const { hello, world } = req.query;
   const { action } = req.body;
