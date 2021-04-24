@@ -13,7 +13,10 @@ export const apiSchema = {
         }),
         params: s.objectWithOnly({ id: s.integer({ parse: true }) }),
         body: s.objectWithOnly({
-          action: s.enum({ values: ["create", "update"], verbose: true }),
+          action: s.enum({
+            values: ["create", "update", "delete"],
+            verbose: true,
+          }),
         }),
       },
       responses: {

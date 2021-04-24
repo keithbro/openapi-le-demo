@@ -19,7 +19,7 @@ export const initialize = (server = express()) => {
         termsOfService: null,
         contact: { email: "hi@hi.com" },
       },
-      host: "https://myapi.com",
+      host: "myapi.com",
       basePath: "/",
       tags: [],
       consumes: ["application/json"],

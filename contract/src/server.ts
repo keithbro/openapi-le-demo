@@ -23,7 +23,7 @@ export interface operations {
       };
       body: {
         payload: {
-          action: "create" | "update";
+          action: "create" | "update" | "delete";
         };
       };
       header: {

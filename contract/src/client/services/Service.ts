@@ -19,7 +19,7 @@ export class Service {
         hello: string,
         world: string,
         payload: {
-            action: 'create' | 'update',
+            action: 'create' | 'update' | 'delete',
         },
         cookie: string = 'access_token={{token}}',
     ): Promise<{

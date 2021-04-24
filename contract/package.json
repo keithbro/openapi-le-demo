@@ -4,8 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/node-fetch": "^2.5.10",
     "strummer": "^2.10.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.1"
   }
 }

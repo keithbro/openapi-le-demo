@@ -1,5 +1,8 @@
 import generateServerTypes from "openapi-typescript";
-import { generate as generateClient } from "openapi-typescript-codegen";
+import {
+  generate as generateClient,
+  HttpClient,
+} from "openapi-typescript-codegen";
 import { writeFileSync } from "fs";
 import { initialize } from "./router";
 import { ApiSchema } from "./types";
@@ -25,5 +28,9 @@ export const generate = (apiSchema: ApiSchema) => {
   // console.log(output);
   writeFileSync("./src/server.ts", output);
 
-  generateClient({ input: openApiSpec, output: "./src/client" });
+  generateClient({
+    input: openApiSpec,
+    output: "./src/client",
+    httpClient: HttpClient.NODE,
+  });
 };
