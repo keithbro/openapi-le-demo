@@ -4,38 +4,47 @@
  */
 
 export interface paths {
-  x: {
-    put: {
-      parameters: {
-        path: {
-          id: number;
-        };
-        query: {
-          hello: string;
-          world: string;
-        };
-        body: {
-          payload: {
-            action: "create" | "update";
-          };
-        };
-        header: {
-          /** Cookie */
-          Cookie: string;
-        };
-      };
-      responses: {
-        /** 201 response */
-        201: {
-          schema: {
-            id: number;
-          };
-        };
-      };
-    };
+  "/api/something/{id}": {
+    put: operations["/api/something/{id}/put"];
   };
 }
 
 export interface definitions {}
 
-export interface operations {}
+export interface operations {
+  "/api/something/{id}/put": {
+    parameters: {
+      path: {
+        id: number;
+      };
+      query: {
+        hello: string;
+        world: string;
+      };
+      body: {
+        payload: {
+          action: "create" | "update";
+        };
+      };
+      header: {
+        /** Cookie */
+        Cookie: string;
+      };
+    };
+    responses:
+      | {
+          /** 201 response */
+          status: 201;
+          schema: {
+            id: number;
+          };
+        }
+      | {
+          /** 400 response */
+          status: 400;
+          schema: {
+            error: string;
+          };
+        };
+  };
+}

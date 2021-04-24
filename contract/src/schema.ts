@@ -3,7 +3,7 @@ import * as s from "strummer";
 
 export const schema = [
   {
-    url: "x",
+    url: "/api/something/:id",
     method: "put" as const,
     schema: {
       request: {
@@ -18,6 +18,7 @@ export const schema = [
       },
       responses: {
         201: s.objectWithOnly({ id: s.integer() }),
+        400: s.objectWithOnly({ error: s.string() }),
       },
     },
   },
