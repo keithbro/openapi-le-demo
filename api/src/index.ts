@@ -9,7 +9,9 @@ const handler: Handler<"updateSomething"> = (req, res) => {
 
   console.log({ id, hello, world, action });
 
-  res.send({ status: 201, schema: { id: 2 } });
+  res.send(201, { id: 42 });
+  // res.send(201, { id: "42" });
+  // res.send(400, { error: "Hello " });
 };
 
 registerEndpoint("updateSomething", handler);

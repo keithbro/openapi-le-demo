@@ -758,8 +758,10 @@ openapi-typescript-codegen@^0.9.3:
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-openapi-typescript@../../../openapi-typescript:
+openapi-typescript@3.2.3:
   version "3.2.3"
+  resolved "https://registry.yarnpkg.com/openapi-typescript/-/openapi-typescript-3.2.3.tgz#119ebdee59c760263eccc7e4c8f9b8685a8cf979"
+  integrity sha512-LNm7U/eVHpQ1GMzPEx4sxP0/3ytlXpjm4lVeXy3q/Cv2ZMueErEDDQQNm0yn4NLGGOGYIHhAs7h6M44+SbroKQ==
   dependencies:
     js-yaml "^4.0.0"
     kleur "^4.1.3"

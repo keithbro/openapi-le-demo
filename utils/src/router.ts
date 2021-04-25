@@ -1,9 +1,12 @@
-import express, { RequestHandler, Response } from "express";
+import express, {
+  RequestHandler as ExpressRequestHandler,
+  Response as ExpressResponse,
+} from "express";
 import {
   router as buildLeRouter,
   RouterAbstraction,
 } from "@luxuryescapes/router";
-import { ApiSchema, CustomHandler, RawResponse } from "./types";
+import { ApiSchema, Handler, RawResponse } from "./types";
 
 export const initialize = (server = express()) => {
   server.use(express.json());
@@ -34,7 +37,7 @@ export const initialize = (server = express()) => {
   return { router, server };
 };
 
-export const convertResponse = (expressRes: Response) => {
+export const convertResponse = (expressRes: ExpressResponse) => {
   return {
     send: (r: RawResponse) => {
       expressRes.status(r.status);
@@ -47,13 +50,12 @@ export const registerEndpoint = <S extends ApiSchema>(
   router: RouterAbstraction,
   apiSchema: S,
   operationId: keyof S,
-  handler: CustomHandler
+  handler: Handler
 ) => {
   const operationSchema = apiSchema[operationId];
 
-  const expressHandler: RequestHandler = (expressReq, expressRes) => {
+  const expressHandler: ExpressRequestHandler = (expressReq, expressRes) => {
     const res = convertResponse(expressRes);
-
     handler(expressReq, res);
   };
 

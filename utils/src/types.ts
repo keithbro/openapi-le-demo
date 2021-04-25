@@ -15,12 +15,12 @@ export interface RawResponse {
   schema: any;
 }
 
-export interface CustomResponse {
-  send: (res: RawResponse) => void;
+export interface Response {
+  send: (code: any, resBody: Record<string, any>) => void;
 }
 
-export interface CustomHandler {
-  (req: Request<any, any, any, any>, res: CustomResponse): void;
+export interface Handler {
+  (req: Request<any, any, any, any>, res: Response): void;
 }
 
 export { Request as ExpressRequest } from "express";

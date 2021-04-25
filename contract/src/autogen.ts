@@ -4,14 +4,30 @@ import { operations } from "./server";
 import { apiSchema } from "./schema";
 
 interface Response<O extends keyof operations> {
-  send: (response: operations[O]["responses"]) => void;
+  send: <
+    StatusCode extends keyof operations[O]["responses"],
+    StatusCodeResponse = operations[O]["responses"][StatusCode]
+  >(
+    code: StatusCode,
+    resBody: StatusCodeResponse extends { schema: any }
+      ? StatusCodeResponse["schema"]
+      : never
+  ) => void;
 }
+
+type ResBody<
+  O extends keyof operations,
+  Response = operations[O]["responses"],
+  StatusCodeResponse = Response[keyof Response]
+> = StatusCodeResponse extends { schema: any }
+  ? StatusCodeResponse["schema"]
+  : never;
 
 export interface Handler<O extends keyof operations> {
   (
     req: ExpressRequest<
       operations[O]["parameters"]["path"],
-      operations[O]["responses"]["schema"],
+      ResBody<O>,
       operations[O]["parameters"]["body"]["payload"],
       operations[O]["parameters"]["query"]
     >,

@@ -31,20 +31,19 @@ export interface operations {
         Cookie: string;
       };
     };
-    responses:
-      | {
-          /** 201 response */
-          status: 201;
-          schema: {
-            id: number;
-          };
-        }
-      | {
-          /** 400 response */
-          status: 400;
-          schema: {
-            error: string;
-          };
+    responses: {
+      /** 201 response */
+      201: {
+        schema: {
+          id: number;
         };
+      };
+      /** 400 response */
+      400: {
+        schema: {
+          error: string;
+        };
+      };
+    };
   };
 }
