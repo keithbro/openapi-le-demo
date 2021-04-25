@@ -1,4 +1,4 @@
-import { Handler, initialize, errorHandler } from "../../contract/src/autogen";
+import { Handler, initialize, errorHandler } from "../../contract/src/server";
 
 const { registerEndpoint, server } = initialize();
 

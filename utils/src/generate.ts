@@ -26,7 +26,7 @@ export const generate = (apiSchema: ApiSchema) => {
 
   const output = generateServerTypes(openApiSpec);
   // console.log(output);
-  writeFileSync("./src/server.ts", output);
+  writeFileSync("./src/spec.ts", output);
 
   generateClient({
     input: openApiSpec,
