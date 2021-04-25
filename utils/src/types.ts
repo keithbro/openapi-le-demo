@@ -1,6 +1,10 @@
 import { RouteSchema } from "@luxuryescapes/router";
 import { Request } from "express";
 
+export interface Schema<T> {
+  schema: T;
+}
+
 export type ApiSchema = Record<
   string,
   {
@@ -16,7 +20,7 @@ export interface RawResponse {
 }
 
 export interface Response {
-  send: (code: any, resBody: Record<string, any>) => void;
+  send: (code: any, resBody: unknown) => void;
 }
 
 export interface Handler {

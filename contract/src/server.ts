@@ -3,29 +3,24 @@
  */
 
 import * as utils from "../../utils/src/router";
-import { ExpressRequest } from "../../utils/src/types";
+import { ExpressRequest, Schema } from "../../utils/src/types";
 import { operations } from "./spec";
 import { apiSchema } from "./schema";
 
-interface Response<O extends keyof operations> {
+interface HandlerResponse<O extends keyof operations> {
   send: <
     StatusCode extends keyof operations[O]["responses"],
     StatusCodeResponse = operations[O]["responses"][StatusCode]
   >(
     code: StatusCode,
-    resBody: StatusCodeResponse extends { schema: any }
-      ? StatusCodeResponse["schema"]
-      : never
+    resBody: StatusCodeResponse extends Schema<infer S> ? S : never
   ) => void;
 }
 
 type ResBody<
   O extends keyof operations,
-  Response = operations[O]["responses"],
-  StatusCodeResponse = Response[keyof Response]
-> = StatusCodeResponse extends { schema: any }
-  ? StatusCodeResponse["schema"]
-  : never;
+  Response = operations[O]["responses"]
+> = Response[keyof Response] extends Schema<infer S> ? S : never;
 
 export interface Handler<O extends keyof operations> {
   (
@@ -35,7 +30,7 @@ export interface Handler<O extends keyof operations> {
       operations[O]["parameters"]["body"]["payload"],
       operations[O]["parameters"]["query"]
     >,
-    res: Response<O>
+    res: HandlerResponse<O>
   ): void;
 }
 
