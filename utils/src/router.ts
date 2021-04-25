@@ -6,7 +6,7 @@ import {
   router as buildLeRouter,
   RouterAbstraction,
 } from "@luxuryescapes/router";
-import { ApiSchema, Handler, RawResponse } from "./types";
+import { ApiSchema, Handler, RawResponse, Response } from "./types";
 
 export const initialize = (server = express()) => {
   server.use(express.json());
@@ -39,9 +39,9 @@ export const initialize = (server = express()) => {
 
 export const convertResponse = (expressRes: ExpressResponse) => {
   return {
-    send: (r: RawResponse) => {
-      expressRes.status(r.status);
-      expressRes.json(r.schema);
+    send: (status: number, json: any) => {
+      expressRes.status(status);
+      expressRes.json(json);
     },
   };
 };

@@ -9,7 +9,12 @@ const handler: Handler<"updateSomething"> = (req, res) => {
 
   console.log({ id, hello, world, action });
 
-  res.send(201, { id: 42 });
+  if (action === "create") {
+    res.send(201, { id: 42 });
+  } else {
+    res.send(400, { error: "Sorry!" });
+  }
+
   // res.send(201, { id: "42" });
   // res.send(400, { error: "Hello " });
 };
